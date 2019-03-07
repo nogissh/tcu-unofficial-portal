@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app.models import Post
 import datetime
 
@@ -19,9 +19,9 @@ def Index(request):
   try:
     page = int(page)
     if page <= 0:
-      page = 1
+      return redirect('/app/home/')
   except:
-    page = 1
+    return redirect('/app/home/')
 
   # 表示するイベントを抽出
   start_num = (page - 1) * 15
