@@ -5,7 +5,11 @@ import datetime
 
 def Index(request):
   """
-  トップページ
+  `トップページ表示用関数`
+  トップページのレンダリングと、次のページ、前のページに対応。
+
+  < page >
+  １以上である必要。１未満であればトップページにリダイレクト
   """
 
   # 掲載期間中のイベントを抽出
@@ -18,7 +22,7 @@ def Index(request):
     page = 1
   try:
     page = int(page)
-    if page <= 0:
+    if page < 1:
       return redirect('/app/home/')
   except:
     return redirect('/app/home/')
