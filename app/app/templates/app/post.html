@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <link rel="stylesheet" type="text/css" href='{% static "app/css/post.css" %}'>
+  <body>
+    <h1>Hello World</h1>
+
+
+    <table>
+       <form action="{% url 'post' %}" method="POST">
+           {% csrf_token %}
+          {{ form.as_table }}
+            <tr><td></td><td><input type="submit" value="click"></td></tr>
+       </form>
+   </table>
+  </body>
+</html>
