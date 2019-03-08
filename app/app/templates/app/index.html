@@ -6,6 +6,10 @@
 <div>
   <img src="{% static 'app/logo.png' %}" onClick="location.href='/app/home/'" />
 </div>
+<!-- ナビゲーション（上） -->
+<div class="uk-margin-top">
+  <a href="/app/post/home/">新しいイベントを追加する</a>
+</div>
 <!-- イベントリスト -->
 <div class="uk-child-width-1-3@m uk-text-center uk-margin-top" uk-grid>
   {% for event in events %}
@@ -18,7 +22,7 @@
   </div>
   {% endfor %}
 </div>
-<!-- ナビゲーション -->
+<!-- ナビゲーション（下） -->
 <div class="uk-width-expand">
   <table class="uk-table">
     <tr>
