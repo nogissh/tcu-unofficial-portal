@@ -14,7 +14,7 @@ def Index(request):
 
   # 掲載期間中のイベントを抽出
   today = datetime.date.today()
-  posts = Post.objects.filter(term_start__lte=today, term_end__gte=today)
+  posts = Post.objects.filter(term_start__lte=today, term_end__gte=today).order_by('date_update').reverse()
 
   # ページ番号を定義
   page = request.GET.get('page', None)
