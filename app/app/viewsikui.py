@@ -4,30 +4,31 @@ from .forms import Contribution
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 import datetime
-
-# Create your views here.
-def index(request):
-    return render(request,'app/index.html')
+from .usage import regist_post
 
 
-def post(request):
+def post_home(request):
+    """
+    投稿ページを表示
+    """
     data = Post.objects.all()
+
     params = {
         "data":data,
         "form":Contribution(),
     }
-
-    if request.method == 'POST':
-        title = request.POST['title']
-        text = request.POST['text']
-        date_update = datetime.datetime.now()
-        term_start = request.POST['term_start']
-        term_end = request.POST['term_end']
-
-        user = User.objects.get(id=request.POST['user'])
+    
+    return render(request,'app/post_home.html',params)
 
 
-        contribution = Post(title=title,text=text,date_update=date_update,term_start=term_start,term_end=term_end,user=user)#,date_post=date_postdate_update=date_update,
-        contribution.save()
-        return redirect(to='/app/home/')
-    return render(request,'app/post.html',params)
+def post_job(request):
+    """
+    投稿処理
+    """
+    status = regist_post(request, Post, User)
+
+    contents = {
+        'detail': 'Completed!!' if status else 'Failed.'
+    }
+
+    return render(request, 'app/post_job.html', contents)
