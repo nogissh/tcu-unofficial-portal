@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- 都市大ロゴ -->
+<div>
+  <img src="{% static 'app/logo.png' %}" onClick="location.href='/app/home/'" />
+</div>
+<!-- イベントリスト -->
+<div class="uk-child-width-1-3@m uk-text-center uk-margin-top" uk-grid>
+  {% for event in events %}
+  <div>
+    <div class="uk-card uk-card-default uk-card-body">
+      <h3 class="uk-text-lead">{{ event.title }}</h3>
+      <p>{{ event.text }}</p>
+      <button onClick="location.href='/app/event/{{ event.id }}/'" class="uk-button uk-button-primary uk-width-small">See</button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- ナビゲーション -->
+<div class="uk-width-expand">
+  <table class="uk-table">
+    <tr>
+      <td class="uk-text-left"><a href="/app/home/?page={{ page_backword }}">前のページ</a></td>
+      <td class="uk-text-center"><a href="/app/home/">ホーム</a></td>
+      <td class="uk-text-right"><a href="/app/home/?page={{ page_forward }}">次のページ</a></td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
